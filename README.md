@@ -1,29 +1,28 @@
-# lab-0
+# lab-3
 
-Préréquis:
-> - Avoir une infra linux
-> - Installer docker
-
-Vous pouvez l'installer à l'aide des commandes suivantes:
+Tâches:
+> - Créez un réseau docker de type bridge
 
 ``
-curl -fsSL https://get.docker.com -o get-docker.sh
+docker network create --driver=bridge --subnet=192.168.2.0/24 sharednetwork
+``
+> - Listez les réseaux disponibles
+
+``
+docker network ls
+``
+> - Créez deux conteneurs ubuntu dans le réseau créé précédement
+
+``
+docker run -it --name ubuntu1 --network sharednetwork -d ubuntu /bin/bash
+  145  docker run -it --name ubuntu2 --network sharednetwork -d ubuntu /bin/bash
+``
+> - Installer la commande ping et tentez de pinguer les conteneurs entre eux avec leur ip et par leur nom
+
+``
+ping ubuntu1
 ``
 
 ``
-sudo sh get-docker.sh
+ping ubuntu2
 ``
-
-Ensuite vous allez devoir ajouter votre utilisateur au groupe __docker__ à l'aide de la commande suivante:
-``sudo usermod -aG docker username``
-
-Ensuite vous pouvez demarrer le service à l'aide de la commande:
-``sudo systemctl start docker``
-
-Enfin vous pouvez également démarrer le service au demarrage de la machine:
-``sudo systemctl enable docker``
-
-Pour vérifier que tout fonctionne très bien vous pouvez exécuter la commande:
-``docker --version``
-
-``docker run hello-world``: pour lancer notre premier conteneur :grin:
