@@ -1,28 +1,11 @@
-# lab-3
+# lab-5
 
 Tâches:
-> - Créez un volume de type volumes
+> - Déployer le logiciel odoo à l'aide de docker-compose
 
-``
-docker volume create --name share
-``
-> - Créez deux conteneurs ubuntu (ubuntu1 et ubuntu2) et Montez le volume créé dans le repertoire /tmp de chacun des conteneurs ubuntu
+> - on peut s'inspirer de la documentation disponible sur le dockerhub: https://hub.docker.com/_/odoo
 
-``
-docker run -it --name ubuntu1 -v share:/tmp -d ubuntu /bin/bash
-``
+> - Modifier le docker-compose afin d'exposer le port 80 du conteneur odoo à l'extérieur et pas le 8069
 
-``
-docker run -it --name ubuntu2 -v share:/tmp -d ubuntu /bin/bash
-``
-> - Créez un fichier toto.txt dans le repertoire /tmp de ubuntu1 et verifier qu'il est bien présent dans /tmp de ubuntu2
-
-
-> - Créez un conteneur apache dont le site internet affiché sera celui hébergé ici: https://github.com/diranetafen/static-website-example.git (utilisez un volume de type bind mount), n'oubliez pas de vérifier que le site est bien accéssible
-
-``
-docker run --name webserver -p 80:80 -d -v ${PWD}/static-website-example:/usr/local/apache2/htdocs/ httpd
-``
-
-``
-docker logs webserver``
+> - Modifier le docker-compose afin que le conteneur odoo et db soit dans le même réseau specifique qui s'appellera odoo_network et de type bridge
+> - Vérifier que l'application odoo est bien accessible
